@@ -1,6 +1,6 @@
 .form-registro {
   width: 400px;
-  background: rgb(105, 171, 228);
+  background: rgba(210, 223, 223, 0.781);
   padding: 30px;
   margin: auto;
   margin-top: 100px;
@@ -41,6 +41,8 @@
     0.925
   ); /* Fondo oscuro semitransparente */
   padding: 20px;
+  margin-left: 300px;
+
   border-radius: 10px;
   color: white;
   max-width: 600px; /* Para limitar el ancho y que no sea muy grande */
@@ -89,8 +91,8 @@
   font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
 .cuadroRegistro {
-  background-color: #cfe2ff;
-  /* Color celeste */
+  background-color: hsla(77, 39%, 7%, 0.925);
+  /* Color oscuro */
   border-radius: 20px;
   padding: 40px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
