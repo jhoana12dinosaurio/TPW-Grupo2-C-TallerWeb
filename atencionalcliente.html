@@ -3,21 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <title>atencion</title>
+    <title>Atención al cliente</title>
+    <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
-    <section class="atencion-cliente">
-        <h2>Atención al Cliente</h2>
-        <p>¿Necesitas ayuda? Contáctanos:</p>
-        <ul>
-            <li><strong>Teléfono:</strong> (555) 555-5555</li>
-            <li><strong>Email:</strong> contacto@tuempresa.com</li>
-            <li><strong>Horario de atención:</strong> Lunes a Viernes de 9:00 a 18:00 hrs.</li>
-        </ul>
-        <a style="background-color: rgb(187, 187, 236);" href="contacto.html" class="btn">Formulario de contacto</a>
-    </section>
+    <form>
+
+        <h2>Atención al cliente</h2>
+
+        <div class="input-group">
+
+            <label for="name">Nombre</label>
+            <input type="text" name="name" id="name" placeholder="Nombre">
+
+            <label for="phone">Telefono</label>
+            <input type="tel" name="phone" id="phone" placeholder="Telefono">
+
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" placeholder="Email">
+
+            <label for="Message">Mensaje</label>
+            <textarea name="message" id="message" cols="30" rows="5" placeholder="Mensaje"></textarea>
+
+            <div class="form-txt">
+                <a href="#">Politica de privacidad</a>
+                <a href="#">Terminos y condiciones</a>
+            </div>
+
+            <input class="btn" type="submit" value="Enviar">
+        </div>
+
+        <h2>Nuestro equipo se pondrá en <strong>contacto contigo</strong></h2>
+    </form>
 </body>
 </html>
