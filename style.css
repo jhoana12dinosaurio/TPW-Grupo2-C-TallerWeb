@@ -62,7 +62,7 @@
     0.925
   ); /* Fondo oscuro semitransparente */
   padding: 20px;
-  margin-left: 300px;
+  margin-left: 320px;
   border-radius: 10px;
   color: white;
   max-width: 600px; /* Para limitar el ancho y que no sea muy grande */
@@ -94,12 +94,12 @@
   background-color: hsla(77, 39%, 7%, 0.925);
   /* Color oscuro */
   border-radius: 20px;
-  padding: 40px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  padding-top: 1px;
+  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.2);
   width: 80%;
   max-width: 800px;
   width: 500px;
-  height: 750px;
+  height: 500px;
   justify-content: end;
 }
 .nav {
@@ -176,4 +176,12 @@
 }
 body {
   background-image: url(img/restaurants_unico.jpg);
+}
+footer {
+  text-align: center;
+  background-color: black;
+  color: white;
+  padding: 10px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 20px;
 }
