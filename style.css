@@ -52,6 +52,20 @@
 .cuadro p {
   color: #dbdfe4;
 }
+.cuadro2 {
+  background-color: hsla(
+    77,
+    39%,
+    7%,
+    0.925
+  ); /* Fondo oscuro semitransparente */
+  padding: 20px;
+  margin-left: 300px;
+  border-radius: 10px;
+  color: white;
+  max-width: 600px; /* Para limitar el ancho y que no sea muy grande */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra opcional */
+}
 .image-container {
   display: flex;
   justify-content: space-around;
