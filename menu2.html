@@ -1,188 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link href="css/bootstrap.min.css" rel="stylesheet" />
-        <link rel="shortcut icon" href="img/pato.png" type="image/x-icon" />
-        <link rel="stylesheet" href="style.css" />
-        <title>Patternou</title>
-    </head>
-    <body>
-        <header>
-            <nav>
-                <div class="container-fluid bg-primary py-3 d-none d-md-block">
-                    <div class="container">
-                        <div class="row">
-                            <div
-                                class="col-md-6 text-center text-lg-left mb-2 mb-lg-0"
-                            >
-                                <div class="d-inline-flex align-items-center">
-                                    <div class="pato">
-                                        <img
-                                            style="width: 70px; height: 70px"
-                                            src="img/pato.png"
-                                            alt=""
-                                        />
-                                        <h1>Patternou</h1>
-                                    </div>
-                                    <a class="text-white pr-3" href="">Home</a>
-                                    <span class="text-white">|</span>
-                                    <a
-                                        class="text-white px-3"
-                                        href="Registro.html"
-                                        >Registro</a
-                                    >
-                                    <span class="text-white">|</span>
-                                    <a
-                                        class="text-white px-3"
-                                        href="Reserva.html"
-                                        >Reserva</a
-                                    >
-                                    <span class="text-white">|</span>
-                                    <a
-                                        class="text-white pl-3"
-                                        href="atencionalcliente.html"
-                                        >servicio de atencion</a
-                                    >
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="img/pato.png" type="image/x-icon" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Patternou</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container-fluid bg-primary py-3 d-none d-md-block">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-lg-left mb-2 mb-lg-0">
+                            <div class="d-inline-flex align-items-center">
+                                <div class="pato">
+                                    <img style="width: 70px; height: 70px" src="img/pato.png" alt="" />
+                                    <h1>Patternou</h1>
                                 </div>
+                                <a class="text-white pr-3" href="">Home</a>
+                                <span class="text-white">|</span>
+                                <a class="text-white px-3" href="Registro.html">Registro</a>
+                                <span class="text-white">|</span>
+                                <a class="text-white px-3" href="Reserva.html">Reserva</a>
+                                <span class="text-white">|</span>
+                                <a class="text-white pl-3" href="atencionalcliente.html">servicio de atencion</a>
                             </div>
                         </div>
                     </div>
                 </div>
-            </nav>
-        </header>
-        <main>
-            <section class="platos">
-                <div class="container-fluid">
-                    <div class="cuadroRegistro">
-                        <div class="form-registro">
-                            <h2>¡Hora de escoger los platos a disgustar!</h2>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="platos">
+            <div class="container-fluid">
+                <div class="cuadroRegistro">
+                    <div class="form-registro">
+                        <h2>¡Hora de escoger los platos a disgustar!</h2>
+                        <br />
+                        <label for="menu">Seleccione su menú:</label><br />
+                        <label for="entrada">Entrada:</label>
+                        <select id="entrada" name="entrada">
+                            <option value="">
+                                --Seleccione una opción--
+                            </option>
                             <br />
-                            <label for="menu">Seleccione su menú:</label><br />
-                            <label for="entrada">Entrada:</label>
-                            <select id="entrada" name="entrada">
-                                <option value="">
-                                    --Seleccione una opción--
-                                </option>
-                                <br />
-                                <option value="causa">Causa rellena</option>
-                                <option value="sopa">Sopa</option>
-                                <option value="tortilla">
-                                    Tortilla de coliflor
-                                </option>
-                                <option value="tamal">Tamales de pollo</option>
-                                <option value="huancaina">
-                                    Papa a la huancaina
-                                </option>
-                                <option value="lechedetigre">
-                                    Leche de tigre afrodisiaco
-                                </option>
-                            </select>
+                            <option value="causa">Causa rellena</option>
+                            <option value="sopa">Sopa</option>
+                            <option value="tortilla">
+                                Tortilla de coliflor
+                            </option>
+                            <option value="tamal">Tamales de pollo</option>
+                            <option value="huancaina">
+                                Papa a la huancaina
+                            </option>
+                            <option value="lechedetigre">
+                                Leche de tigre afrodisiaco
+                            </option>
+                        </select>
+                        <br />
+                        <label for="segundo">Segundo plato:</label>
+                        <select id="segundo" name="segundo">
+                            <option value="">
+                                --Seleccione una opción--
+                            </option>
                             <br />
-                            <label for="segundo">Segundo plato:</label>
-                            <select id="segundo" name="segundo">
-                                <option value="">
-                                    --Seleccione una opción--
-                                </option>
-                                <br />
-                                <option value="pasta">Pasta al Alfredo</option>
-                                <option value="filete">Filete de res</option>
-                                <option value="pollo">
-                                    Pollo a la parrilla
-                                </option>
-                                <option value="ceviche">Ceviche clásico</option>
-                                <option value="chicharron">
-                                    Chicharron de pescado y pota
-                                </option>
-                            </select>
-                            <br />
-                            <label for="postre">Postre:</label>
-                            <select id="postre" name="postre">
-                                <option value="">
-                                    --Seleccione una opción--
-                                </option>
-                                <option value="parfait">
-                                    Parfait frutos rojos
-                                </option>
-                                <option value="helado">Helado</option>
-                                <option value="cheesecake">
-                                    Cheesecake de fresa
-                                </option>
-                                <option value="ensalada">
-                                    Ensalada de frutas
-                                </option>
-                            </select>
-                        </div>
+                            <option value="pasta">Pasta al Alfredo</option>
+                            <option value="filete">Filete de res</option>
+                            <option value="pollo">
+                                Pollo a la parrilla
+                            </option>
+                            <option value="ceviche">Ceviche clásico</option>
+                            <option value="chicharron">
+                                Chicharron de pescado y pota
+                            </option>
+                        </select>
+                        <br />
+                        <label for="postre">Postre:</label>
+                        <select id="postre" name="postre">
+                            <option value="">
+                                --Seleccione una opción--
+                            </option>
+                            <option value="parfait">
+                                Parfait frutos rojos
+                            </option>
+                            <option value="helado">Helado</option>
+                            <option value="cheesecake">
+                                Cheesecake de fresa
+                            </option>
+                            <option value="ensalada">
+                                Ensalada de frutas
+                            </option>
+                        </select>
                     </div>
                 </div>
-            </section>
-            <section>
-                <div class="container-fluid">
-                    <div class="container">
-                        <div class="cuadro">
-                            <h1>Patternou el mejor restaurante</h1>
-                            <p>
-                                Bienvenidos a El Gran Banquete, el lugar donde
-                                tus gustos y apetitos no tienen límites.
-                                Disfruta de una amplia variedad de platos
-                                frescos y deliciosos, cuidadosamente
-                                seleccionados para satisfacer todos los
-                                paladares. Desde ensaladas frescas y excelentes
-                                carnes, hasta postres irresistibles, nuestro
-                                buffet ofrece una experiencia culinaria única,
-                                llena de sabor y opciones infinitas. Ven y
-                                descubre un festín de sabores en un ambiente
-                                acogedor y familiar. ¡Aquí, comer es un placer
-                                sin fin!
-                            </p>
-                        </div>
+            </div>
+        </section>
+        <section>
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="cuadro">
+                        <h1>Patternou el mejor restaurante</h1>
+                        <p>
+                            Bienvenidos a El Gran Banquete, el lugar donde
+                            tus gustos y apetitos no tienen límites.
+                            Disfruta de una amplia variedad de platos
+                            frescos y deliciosos, cuidadosamente
+                            seleccionados para satisfacer todos los
+                            paladares. Desde ensaladas frescas y excelentes
+                            carnes, hasta postres irresistibles, nuestro
+                            buffet ofrece una experiencia culinaria única,
+                            llena de sabor y opciones infinitas. Ven y
+                            descubre un festín de sabores en un ambiente
+                            acogedor y familiar. ¡Aquí, comer es un placer
+                            sin fin!
+                        </p>
                     </div>
                 </div>
-            </section>
-            <section>
-                <div class="container image-container">
-                    <div class="row justify-content-center">
-                        <table border="6">
-                            <tr>
-                                <td colspan="3" class="text-center">
-                                    <div
-                                        class="image-row d-flex justify-content-center align-items-flex-end"
-                                    >
-                                        <img
-                                            src="img/descarga.png"
-                                            alt="Foto 1"
-                                            class="img-fluid"
-                                        />
-                                        <img
-                                            src="img/6565d9491a89f4b7b7915b3e_tipos de restaurante.jpg"
-                                            alt="Foto 2"
-                                            class="img-fluid"
-                                        />
-                                        <img
-                                            src="img/modern-chef-and-cooking-restaurant-logo-design-template-free-vector.jpg"
-                                            alt="Foto 3"
-                                            class="img-fluid"
-                                        />
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
+            </div>
+        </section>
+        <section>
+            <div class="container image-container">
+                <div class="row justify-content-center">
+                    <table border="6">
+                        <tr>
+                            <td colspan="3" class="text-center">
+                                <div class="image-row d-flex justify-content-center align-items-flex-end">
+                                    <img src="img/descarga.png" alt="Foto 1" class="img-fluid" />
+                                    <img src="img/6565d9491a89f4b7b7915b3e_tipos de restaurante.jpg" alt="Foto 2"
+                                        class="img-fluid" />
+                                    <img src="img/modern-chef-and-cooking-restaurant-logo-design-template-free-vector.jpg"
+                                        alt="Foto 3" class="img-fluid" />
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
-            </section>
-            <section>
-                <div class="d-flex">
-                    <div class="container">
-                        <img src="img/images (1).jpeg" alt="" />
-                        <img src="img/albondigas.jpeg" alt="" />
-                        <img src="img/arrozconpollo.jpg" alt="" />
-                        <img src="img/causa.jpeg" alt="" />
-                        <img src="img/images (2).jpeg" alt="" />
-                        <img src="img/images.jpeg" alt="" />
-                    </div>
+            </div>
+        </section>
+        <section>
+            <div class="d-flex">
+                <div class="container">
+                    <img src="img/images (1).jpeg" alt="" />
+                    <img src="img/albondigas.jpeg" alt="" />
+                    <img src="img/arrozconpollo.jpg" alt="" />
+                    <img src="img/causa.jpeg" alt="" />
+                    <img src="img/images (2).jpeg" alt="" />
+                    <img src="img/images.jpeg" alt="" />
                 </div>
-            </section>
-        </main>
-    </body>
+            </div>
+        </section>
+    </main>
+</body>
 </html>
