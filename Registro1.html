@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+    <script>
+    function toggleSubmitButton() {
+            const termsCheckbox = document.getElementById('terms');
+            const submitButton = document.getElementById('submitBtn');
+            submitButton.disabled = !termsCheckbox.checked;
+        }
+        </script>
+</head>
+<body>
+    <section class="form-registro">
+        <form action="https://formsubmit.co/U22320718@utp.edu.pe/U22220116@utp.edu.pe" method="POST"/>
+        <h4>Formulario Registro</h4>
+        <input class="controls" name="text" id="nombres" placeholder="Ingrese su Nombre">
+        <input class="controls" type="text" name="apellidos" id="apellidos" placeholder="Ingrese su Apellido">
+        <input class="controls" type="email" name="correo" id="correo" placeholder="Ingrese su Correo">
+        <input class="controls" type="password" name="password" id="password" placeholder="Ingrese su Contraseña">
+        <input type="checkbox" id="terms" name="terms" onclick="toggleSubmitButton()">
+        <label for="terms">Acepto los <a href="terminos.html" target="_blank">Términos y Condiciones</a></label><br><br>
+        <button type="submit" id="submitBtn" disabled>Enviar</button>
+        <p><a href="#">¿Ya tengo cuenta?</a></p>
+        
+    </section>
+</body>
+
+</html>
