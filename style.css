@@ -174,7 +174,7 @@
   border-radius: 15px;
   border-color: #007bff;
 }
-body {
+main {
   background-image: url(img/restaurants_unico.jpg);
 }
 footer {
@@ -185,4 +185,3 @@ footer {
   font-family: "Courier New", Courier, monospace;
   font-size: 20px;
 }
-
