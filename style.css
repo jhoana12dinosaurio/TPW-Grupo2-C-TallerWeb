@@ -102,17 +102,15 @@
   height: 500px;
   justify-content: end;
 }
-.nav {
-  background-color: #131312;
-}
 .portafolio {
   background: url("img/66b45af5451555ee3a8780aa_restaurante.jpeg") no-repeat
     center center fixed;
   background-size: 100% 100%;
-  align-items: center;
-  justify-content: center;
   position: relative;
   min-height: 1000px; /* Esto asegura que ocupe al menos la altura completa de la ventana */
+}
+.team {
+  background-color: #dbdfe4;
 }
 
 .contenedor {
@@ -173,9 +171,6 @@
   margin: 50px;
   border-radius: 15px;
   border-color: #007bff;
-}
-main {
-  background-image: url(img/restaurants_unico.jpg);
 }
 footer {
   text-align: center;
