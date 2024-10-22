@@ -5,124 +5,215 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link rel="shortcut icon" href="img/pato.png" type="image/x-icon" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles.css" />
     <title>Patternou</title>
 </head>
 <body>
-    <main class="portafolio overlay">
-        <section>
-            <div class=" container-fluid  py-3 d-none d-md-block">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-6 text-center text-lg-left mb-2 mb-lg-0">
-                            <div class="d-inline-flex align-items-center">
-                                <div class="pato">
-                                    <img style="width: 70px; height: 70px" src="img/pato.png" alt="" />
-                                    <h1>Patternou</h1>
-                                </div>
-                                <a class="text-white pr-3" href="">Home</a>
-                                <span class="text-white">|</span>
-                                <a class="text-white px-3" href="Registro1.html">Registro</a>
-                                <span class="text-white">|</span>
-                                <a class="text-white px-3" href="Reserva.html">Reserva</a>
-                                <span class="text-white">|</span>
-                                <a class="text-white pl-3" href="atencionalcliente.html">servicio de atencion</a>
-                            </div>
-                        </div>
-                    </div>
+    <header class="header">
+        <div class="menu container">
+            <a href="#" class="logo">Patternou</a>
+            <input type="checkbox" id="menu" />
+            <label for="menu">
+                <img src="img/principal.jpg" class="menu-icono" alt="menu">
+            </label>
+            <nav class="navbar">
+                <ul>
+                    <li><a href="imagenescontenedor.html">Comidas</a></li>
+                    <li><a href="Registro1.html">Registro</a></li>
+                    <li><a href="atencionalcliente.html">Contáctanos</a></li>
+                    <li><a href="Reserva.html" class="reserva-btn">Reservas</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="header-content container">
+            <div class="header-txt">
+                <h1>Patternou</h1>
+                <p>Bienvenidos al mejor restaurante Peruano.</p>
+            </div>
+        </div>
+    </header>
+
+    <section class="information container">
+
+        <div class="information-content">
+
+            <div class="information-1">
+                <div class="information-c1">
+                    <h3>Conoce nuestra historia</h3>
+                    <p>
+                        "Patternou" surgió de manera casual, durante una conversación entre amigos sobre la
+                        pasión por la comida con un sabor único y una experiencia gastronómica inigualable. 
+                    </p>
+                </div>
+                <div class="information-a1">
+                    <img src="img/restaurants_unico.jpg" alt="">
                 </div>
             </div>
-        </section>
-        <main class="portafolio">
-            <section class="">
-                <section class="platos d-flex">
-                    <div class="container-fluid">
-                        <div class="cuadroRegistro">
-                            <div class="form-registro">
-                                <h2>¡Hora de escoger los platos a disgustar!</h2>
-                                <br />
-                                <label for="menu">Seleccione su menú:</label><br />
-                                <label for="entrada">Entrada:</label>
-                                <select id="entrada" name="entrada">
-                                    <option value="">
-                                        --Seleccione una opción--
-                                    </option>
-                                    <br />
-                                    <option value="causa">Causa rellena</option>
-                                    <option value="sopa">Sopa</option>
-                                    <option value="tortilla">
-                                        Tortilla de coliflor
-                                    </option>
-                                    <option value="tamal">Tamales de pollo</option>
-                                    <option value="huancaina">
-                                        Papa a la huancaina
-                                    </option>
-                                    <option value="lechedetigre">
-                                        Leche de tigre afrodisiaco
-                                    </option>
-                                </select>
-                                <br />
-                                <label for="segundo">Segundo plato:</label>
-                                <select id="segundo" name="segundo">
-                                    <option value="">
-                                        --Seleccione una opción--
-                                    </option>
-                                    <br />
-                                    <option value="pasta">Pasta al Alfredo</option>
-                                    <option value="filete">Filete de res</option>
-                                    <option value="pollo">
-                                        Pollo a la parrilla
-                                    </option>
-                                    <option value="ceviche">Ceviche clásico</option>
-                                    <option value="chicharron">
-                                        Chicharron de pescado y pota
-                                    </option>
-                                </select>
-                                <br />
-                                <label for="postre">Postre:</label>
-                                <select id="postre" name="postre">
-                                    <option value="">
-                                        --Seleccione una opción--
-                                    </option>
-                                    <option value="parfait">
-                                        Parfait frutos rojos
-                                    </option>
-                                    <option value="helado">Helado</option>
-                                    <option value="cheesecake">
-                                        Cheesecake de fresa
-                                    </option>
-                                    <option value="ensalada">
-                                        Ensalada de frutas
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="container-fluid">
-                        <div class="container">
-                            <div class="cuadro">
-                                <h1>Patternou el mejor restaurante</h1>
-                                <p>
-                                    Bienvenidos a El Gran Banquete, el lugar donde
-                                    tus gustos y apetitos no tienen límites.
-                                    Disfruta de una amplia variedad de platos
-                                    frescos y deliciosos, cuidadosamente
-                                    seleccionados para satisfacer todos los
-                                    paladares. Desde ensaladas frescas y excelentes
-                                    carnes, hasta postres irresistibles, nuestro
-                                    buffet ofrece una experiencia culinaria única,
-                                    llena de sabor y opciones infinitas. Ven y
-                                    descubre un festín de sabores en un ambiente
-                                    acogedor y familiar. ¡Aquí, comer es un placer
-                                    sin fin!
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </section>
-        </main>
+
+            <div class="information-2">
+                <div class="information-b1">
+                    <img src="img/amix.jpeg" alt="">
+                </div>
+                <div class="information-c1">
+                    <h3>PATTERNOU</h3>
+                    <p>
+                        Bienvenidos a el gran banquete "Patternou", el lugar donde
+                        tus gustos y apetitos no tienen límites.
+                        Disfruta de una amplia variedad de platos
+                        frescos y deliciosos, cuidadosamente
+                        seleccionados para satisfacer todos los
+                        paladares. Desde ensaladas frescas y excelentes
+                        carnes, hasta postres irresistibles, nuestro
+                        buffet ofrece una experiencia culinaria única,
+                        llena de sabor y opciones infinitas. Ven y
+                        descubre un festín de sabores en un ambiente
+                        acogedor y familiar. ¡Aquí, comer es un placer
+                        sin fin!
+                    </p>
+                </div>             
+            </div>
+        </div>
+    </section>
+        
+    
+         
+    <section class="menu-carta">                      
+    <div class="menu-container">
+        <div class="menu-header">
+          <h1>CARTA</h1>
+          <p>Una experiencia culinaria excepcional</p>
+        </div>
+    
+        <div class="menu-section">
+          <h2 class="section-title">Entradas</h2>
+          <div class="menu-items">
+            <div class="menu-item">
+              <div class="item-details">
+                <div class="item-name">Causa rellena</div>
+                <div class="item-description">Base de puré de papa amarilla mezclada con limón y ají.</div>
+              </div>
+              <div class="item-price">S/. 18</div>
+            </div>
+            <div class="menu-item">
+              <div class="item-details">
+                <div class="item-name">Sopa de sémola</div>
+                <div class="item-description">Sémola de trigo, caldo de pollo o carne, añadiendo verduras.</div>
+              </div>
+              <div class="item-price">S/. 15</div>
+            </div>
+            <div class="menu-item">
+              <div class="item-details">
+                <div class="item-name">Leche de tigre afrodisíaco</div>
+                <div class="item-description">Jugo de limón, caldo de pescado, ají, ajo, cilantro y mariscos.</div>
+              </div>
+              <div class="item-price">S/. 19</div>
+            </div>
+            <div class="menu-item">
+              <div class="item-details">
+                <div class="item-name">Tamales de pollo</div>
+                <div class="item-description">Masa de maíz rellena con pollo sazonado, aceitunas, huevo duro y especias.</div>
+              </div>
+              <div class="item-price">S/. 14</div>
+            </div>
+            <div class="menu-item">
+              <div class="item-details">
+                <div class="item-name">Papa a la huancaína</div>
+                <div class="item-description">Rodajas de papa hervida cubiertas con una salsa cremosa hecha a base de ají amarillo, queso fresco, leche y galletas.</div>
+              </div>
+              <div class="item-price">S/. 16</div>
+            </div>
+          </div>
+        </div>
+    
+        <div class="menu-section">
+          <h2 class="section-title">Platos Principales</h2>
+          <div class="menu-items">
+            <div class="menu-item">
+              <div class="item-details">
+                <div class="item-name">Lomo Saltado</div>
+                <div class="item-description">Tiras de lomo fino saltadas con verduras y papas fritas.</div>
+              </div>
+              <div class="item-price">S/. 48</div>
+            </div>
+            <div class="menu-item">
+              <div class="item-details">
+                <div class="item-name">Pollo a la parrilla</div>
+                <div class="item-description">Jugoso pollo marinado con especias y asado a la perfección sobre brasas.</div>
+              </div>
+              <div class="item-price">S/. 42</div>
+            </div>
+            <div class="menu-item">
+              <div class="item-details">
+                <div class="item-name">Ceviche clásico</div>
+                <div class="item-description">Fresco pescado marinado en jugo de limón, mezclado con cebolla, ají y cilantro. Acompañado de choclo, camote y cancha.</div>
+              </div>
+              <div class="item-price">S/. 52</div>
+            </div>
+            <div class="menu-item">
+              <div class="item-details">
+                <div class="item-name">Ají de Gallina</div>
+                <div class="item-description">Cremosa preparación de pollo con ají amarillo.</div>
+              </div>
+              <div class="item-price">S/. 38</div>
+            </div>
+            <div class="menu-item">
+              <div class="item-details">
+                <div class="item-name">Fetuccini al Pesto</div>
+                <div class="item-description">Pasta fresca con salsa pesto casera.</div>
+              </div>
+              <div class="item-price">S/. 36</div>
+            </div>
+          </div>
+        </div>
+    
+        <div class="menu-section">
+          <h2 class="section-title">Postres</h2>
+          <div class="menu-items">
+            <div class="menu-item">
+              <div class="item-details">
+                <div class="item-name">Parfait frutos rojos</div>
+                <div class="item-description">Capas de frescas frutas, cremoso yogur griego y crujiente granola de avena.</div>
+              </div>
+              <div class="item-price">S/. 25</div>
+            </div>
+            <div class="menu-item">
+              <div class="item-details">
+                <div class="item-name">Arroz con leche</div>
+                <div class="item-description">Reconfortante postre cremoso hecho a base de arroz cocido en leche, endulzado con azúcar y aromatizado con canela y vainilla.</div>
+              </div>
+              <div class="item-price">S/. 12</div>
+            </div>
+            <div class="menu-item">
+              <div class="item-details">
+                <div class="item-name">Cheesecake de Maracuyá</div>
+                <div class="item-description">Con salsa de maracuyá y frutas frescas</div>
+              </div>
+              <div class="item-price">S/. 15</div>
+            </div>
+            <div class="menu-item">
+              <div class="item-details">
+                <div class="item-name">Brownie con Helado</div>
+                <div class="item-description">Brownie caliente con helado de vainilla</div>
+              </div>
+              <div class="item-price">S/. 17</div>
+            </div>
+            <div class="menu-item">
+              <div class="item-details">
+                <div class="item-name">Ensalada de frutas</div>
+                <div class="item-description">Colorida mezcla de frutas frescas, como melón, piña, uvas y fresas, cortadas en trozos y aliñadas con un toque de limón o miel.</div>
+              </div>
+              <div class="item-price">S/. 18</div>
+            </div>
+          </div>
+        </div>
+    
+        <a href="#" class="order-button">Realizar Pedido</a>
+      </div>
+    </section>  
+
+                       
+                         
         <section id="about " style="background-color: rgb(236, 233, 229);">
             <div class="container">
                 <div class="row align-items-center">
