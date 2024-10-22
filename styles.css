@@ -153,9 +153,6 @@ h3{
 
 
 
-
-
-
 .menu-carta {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding: 40px 20px;
@@ -273,4 +270,3 @@ h3{
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(230, 126, 34, 0.4);
   }
-</style>
