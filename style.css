@@ -388,3 +388,56 @@ footer {
     font-family: "Courier New", Courier, monospace;
     font-size: 20px;
 }
+/*----------------el juego de recoleccion de puntos---------------------*/
+.tarjetita {
+    width: 300px;
+    height: 200px;
+    background-color: #e0f2f1; /* Color de fondo similar a la tarjeta */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    position: relative;
+}
+
+.loguito {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.titulojuego {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.subtitulo {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.cuadricula {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.cuadrito {
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border: 1px solid #ccc;
+    margin: 5px;
+}
+.cuadrito {
+    /* ... */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cuadrito:hover {
+    background-color: lightblue;
+}

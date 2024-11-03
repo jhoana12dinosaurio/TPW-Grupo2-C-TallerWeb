@@ -1,0 +1,13 @@
+{
+    "clientes": [
+        {
+            "nombres": "",
+            "apellidos": "",
+            "correo": "",
+            "password": "",
+            "terminos": false,
+            "puntos": 0,
+            "premios_canjeados": ["pulsera", "taza", "postre", "pedido gratis"]
+        }
+    ]
+}
