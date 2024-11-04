@@ -12,7 +12,7 @@
         <header>
             <div class="menu container">
                 <img class="pato" src="img/pato.png" alt="" />
-                <a href="#" class="logo">Patternou</a>
+                <a href="menu2.html" class="logo">Patternou</a>
                 <input type="checkbox" id="menu" />
                 <label for="menu">
                     <img
@@ -482,6 +482,57 @@
                     </div>
                 </div>
             </div>
+        </section>
+        <section>
+            <img
+                src="img/pato.png"
+                alt="Click para abrir la ventana"
+                id="open-modal"
+            />
+
+            <div id="modal" class="modal">
+                <div class="modal-content">
+                    <div class="tarjetita">
+                        <p class="titulojuego">Juego</p>
+                        <p class="subtitulo">Recolecta tus puntos</p>
+                        <div class="cuadricula">
+                            <div class="cuadrito">10</div>
+                            <div class="cuadrito">20</div>
+                            <div class="cuadrito">30</div>
+                            <div class="cuadrito">40</div>
+                            <div class="cuadrito">50</div>
+                            <div class="cuadrito">60</div>
+                            <div class="cuadrito">70</div>
+                            <div class="cuadrito">80</div>
+                            <div class="cuadrito">90</div>
+                            <div class="cuadrito">100</div>
+                        </div>
+                    </div>
+
+                    <span class="close">&times;</span>
+                </div>
+            </div>
+
+            <script src="script.js"></script>
+            <script>
+                const modal = document.getElementById("modal");
+                const btn = document.getElementById("open-modal");
+                const span = document.getElementsByClassName("close")[0];
+
+                btn.onclick = function () {
+                    modal.style.display = "block";
+                };
+
+                span.onclick = function () {
+                    modal.style.display = "none";
+                };
+
+                window.onclick = function (event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                };
+            </script>
         </section>
         <!-- End of Team Section -->
     </body>
