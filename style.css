@@ -322,6 +322,19 @@ h3 {
     cursor: pointer;
     border-radius: 20px;
 }
+.btn-servicio {
+    background-color: rgb(155, 147, 101); /* Color de fondo verde */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 20px;
+}
 .galeria-port {
     display: flex;
     justify-content: space-evenly;

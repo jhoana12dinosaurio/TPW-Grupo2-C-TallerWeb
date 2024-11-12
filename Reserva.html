@@ -13,11 +13,63 @@
             background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
                 url(img/66b45af5451555ee3a8780aa_restaurante.jpeg);
         }
+
+        table {
+            background-color: #ffffff;
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .alert {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        #seccion-descuento {
+            display: flex;
+        }
+        .hide {
+            display: none;
+        }
+        .show {
+            display: block;
+        }
     </style>
     <body>
         <div class="reserva-mesa">
             <h3>Reserva tu Mesa</h3>
-            <form class="form-registro" action="URL" method="post">
+            <form id="formReserva" class="form-registro" method="post">
                 <label for="nombre">Nombre Completo:</label>
                 <input
                     type="text"
@@ -39,10 +91,10 @@
                 <label for="personas">Número de Personas:</label>
                 <input
                     type="number"
-                    id="personas"
-                    name="personas"
+                    id="num_personas"
+                    name="num_personas"
                     min="1"
-                    max="25"
+                    max="10"
                     placeholder="Ingrese el número de personas"
                     required
                 />
@@ -53,8 +105,170 @@
                 <label for="hora">Hora de la Reserva:</label>
                 <input type="time" id="hora" name="hora" required />
 
+                <div id="seccion-descuento">
+                    <button
+                        type="button"
+                        class="btn-servicio"
+                        onclick="verificarDescuento()"
+                    >
+                        Quiero mi descuento
+                    </button>
+                    <div class="hide caja-descuento">Descuento</div>
+                </div>
+
                 <button type="submit">Reservar Mesa</button>
             </form>
         </div>
+        <script>
+            // Variables globales
+            let reservas = [];
+            let nextId = 1;
+            let descuento = 0;
+
+            //Capturar la data del formulario
+            let formReserva = document.querySelector("#formReserva");
+
+            formReserva.addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                // Obtener valores del formulario
+                const nombre = document.getElementById("nombre").value.trim();
+                const telefono = document
+                    .getElementById("telefono")
+                    .value.trim();
+                const num_personas = parseInt(
+                    document.getElementById("num_personas").value
+                );
+                const fecha = document.getElementById("fecha").value.trim();
+                const hora = document.getElementById("hora").value.trim();
+
+                // Validar campos
+                if (
+                    !nombre ||
+                    !telefono ||
+                    isNaN(num_personas) ||
+                    !fecha ||
+                    !hora
+                ) {
+                    showAlert("error");
+                    return;
+                }
+
+                // Crear una nueva reserva
+                const reserva = {
+                    id: nextId++,
+                    nombre: nombre,
+                    telefono: telefono,
+                    num_personas: num_personas,
+                    fecha: fecha,
+                    hora: hora,
+                    descuento: descuento,
+                };
+
+                // Agregar a la lista de reservas
+                reservas.push(reserva);
+
+                //Limpiar el formulario
+                formReserva.reset();
+
+                //Almacenado de datos localmente en localStorage
+                guardarDatos();
+
+                // Actualizar tabla
+                actualizarTabla();
+
+                //console.log(reservas);
+            });
+
+            // Guardar datos en localStorage
+            function guardarDatos() {
+                localStorage.setItem("reservas", JSON.stringify(reservas));
+                localStorage.setItem("lastId", nextId.toString());
+            }
+
+            function showAlert(type) {
+                const alertSuccess = document.getElementById("alertSuccess");
+                const alertError = document.getElementById("alertError");
+
+                alertSuccess.style.display = "none";
+                alertError.style.display = "none";
+
+                if (type === "success") {
+                    alertSuccess.style.display = "block";
+                    setTimeout(
+                        () => (alertSuccess.style.display = "none"),
+                        3000
+                    );
+                } else {
+                    alertError.style.display = "block";
+                    setTimeout(() => (alertError.style.display = "none"), 3000);
+                }
+            }
+
+            //Actualiza listado de reservas
+            function actualizarTabla() {
+                const tbody = document.getElementById("productList");
+                tbody.innerHTML = "";
+
+                reservas.forEach((reserva) => {
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `
+                        <td>${reserva.id}</td>
+                        <td>${reserva.nombre}</td>
+                        <td>${reserva.telefono}</td>
+                        <td class="text-right">${reserva.num_personas}</td>
+                        <td class="text-right">${reserva.fecha}</td>
+                        <td class="text-right">${reserva.hora}</td>
+                        <td class="text-right">${reserva.descuento}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+
+            // Cargar datos del localStorage al iniciar
+            function cargarDatos() {
+                const reservasAlmacenadas = localStorage.getItem("reservas");
+                const lastIdGuardado = localStorage.getItem("lastId");
+
+                if (reservasAlmacenadas) {
+                    reservas = JSON.parse(reservasAlmacenadas);
+                    actualizarTabla();
+                }
+
+                if (lastIdGuardado) {
+                    nextId = parseInt(lastIdGuardado);
+                }
+            }
+
+            const verificarDescuento = () => {
+                // Simulamos una probabilidad del 30% de ganar un descuento del 10%
+                const ganador = Math.random() < 0.3;
+                const botonDescuento = document.querySelector(".btn-servicio");
+                const cajaDescuento = document.querySelector(".caja-descuento");
+
+                if (descuento != 0) return false;
+
+                botonDescuento.classList.add("hide");
+                cajaDescuento.classList.remove("hide");
+
+                if (ganador) {
+                    //Si es true, se lleva el 10%
+                    descuento = 10;
+                    cajaDescuento.innerHTML = `
+                    Haz ganado el ${descuento}% de descuento en el total de tu cuenta.
+                    `;
+                    return false;
+                }
+
+                //Si es false, se lleva el 5%
+                descuento = 5;
+                cajaDescuento.innerHTML = `
+                    Haz ganado el ${descuento}% de descuento en el total de tu cuenta.
+                    `;
+            };
+
+            // Cargar datos al iniciar la página
+            cargarDatos();
+        </script>
     </body>
 </html>

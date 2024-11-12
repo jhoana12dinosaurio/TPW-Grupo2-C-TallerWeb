@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>servicio</title>
+    </head>
+    <body>
+        <h2>Listado de Reservas</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Telefono</th>
+                    <th class="text-right">Num personas</th>
+                    <th class="text-right">Fecha</th>
+                    <th class="text-right">Hora</th>
+                    <th class="text-right">Descuento</th>
+                </tr>
+            </thead>
+            <tbody id="productList"></tbody>
+        </table>
+        <script>
+            //Actualiza listado de reservas
+            function actualizarTabla() {
+                const tbody = document.getElementById("productList");
+                tbody.innerHTML = "";
+
+                reservas.forEach((reserva) => {
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `
+                        <td>${reserva.id}</td>
+                        <td>${reserva.nombre}</td>
+                        <td>${reserva.telefono}</td>
+                        <td class="text-right">${reserva.num_personas}</td>
+                        <td class="text-right">${reserva.fecha}</td>
+                        <td class="text-right">${reserva.hora}</td>
+                        <td class="text-right">${reserva.descuento}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+
+            // Cargar datos del localStorage al iniciar
+            function cargarDatos() {
+                const reservasAlmacenadas = localStorage.getItem("reservas");
+                const lastIdGuardado = localStorage.getItem("lastId");
+
+                if (reservasAlmacenadas) {
+                    reservas = JSON.parse(reservasAlmacenadas);
+                    actualizarTabla();
+                }
+
+                if (lastIdGuardado) {
+                    nextId = parseInt(lastIdGuardado);
+                }
+            }
+
+            // Cargar datos al iniciar la página
+            cargarDatos();
+        </script>
+    </body>
+</html>
