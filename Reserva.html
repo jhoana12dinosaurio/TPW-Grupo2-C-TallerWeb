@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="style.css" />
         <link href="css/bootstrap.min.css" rel="stylesheet" />
+        <link href="css/card.css" rel="stylesheet" />
 
         <title>Reserva de Mesas</title>
     </head>
@@ -65,7 +66,29 @@
         .show {
             display: block;
         }
+        .mimodal {
+            width: 500px;
+            height: 300px;
+            position: absolute;
+            top: 50px;
+            left: 50%;
+            margin-left: -250px;
+            background-color: #ffffff;
+            padding: 20px 10px;
+            border-radius: 5px;
+            z-index: 10;
+        }
+        .mioverlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #00000080;
+            z-index: 9;
+        }
     </style>
+
     <body>
         <div class="reserva-mesa">
             <h3>Reserva tu Mesa</h3>
@@ -105,20 +128,41 @@
                 <label for="hora">Hora de la Reserva:</label>
                 <input type="time" id="hora" name="hora" required />
 
-                <div id="seccion-descuento">
+                <div class="cards-container" id="seccion-descuento">
                     <button
                         type="button"
                         class="btn-servicio"
-                        onclick="verificarDescuento()"
+                        onclick="mostrarModal()"
                     >
                         Quiero mi descuento
                     </button>
                     <div class="hide caja-descuento">Descuento</div>
                 </div>
 
+                <div id="alertSuccess" class="alert alert-success">
+                    Reserva guardada exitosamente
+                </div>
+
+                <div id="alertError" class="alert alert-error">
+                    Por favor complete todos los campos correctamente
+                </div>
+
                 <button type="submit">Reservar Mesa</button>
             </form>
+
+            <div class="mimodal hide" id="modal-descuento">
+                <h3 style="color: #4e3e3e">
+                    ¡Elige una carta para descubrir tu descuento!
+                </h3>
+                <div class="cards-container">
+                    <div class="card" onclick="revealDiscount(this)">?</div>
+                    <div class="card" onclick="revealDiscount(this)">?</div>
+                    <div class="card" onclick="revealDiscount(this)">?</div>
+                </div>
+            </div>
+            <div class="mioverlay hide"></div>
         </div>
+
         <script>
             // Variables globales
             let reservas = [];
@@ -174,10 +218,9 @@
                 //Almacenado de datos localmente en localStorage
                 guardarDatos();
 
-                // Actualizar tabla
-                actualizarTabla();
-
-                //console.log(reservas);
+                //recargar página
+                showAlert("success");
+                //cargarDatos();
             });
 
             // Guardar datos en localStorage
@@ -195,34 +238,14 @@
 
                 if (type === "success") {
                     alertSuccess.style.display = "block";
-                    setTimeout(
-                        () => (alertSuccess.style.display = "none"),
-                        3000
-                    );
+                    setTimeout(() => {
+                        //alertSuccess.style.display = "none";
+                        location.reload();
+                    }, 2000);
                 } else {
                     alertError.style.display = "block";
                     setTimeout(() => (alertError.style.display = "none"), 3000);
                 }
-            }
-
-            //Actualiza listado de reservas
-            function actualizarTabla() {
-                const tbody = document.getElementById("productList");
-                tbody.innerHTML = "";
-
-                reservas.forEach((reserva) => {
-                    const tr = document.createElement("tr");
-                    tr.innerHTML = `
-                        <td>${reserva.id}</td>
-                        <td>${reserva.nombre}</td>
-                        <td>${reserva.telefono}</td>
-                        <td class="text-right">${reserva.num_personas}</td>
-                        <td class="text-right">${reserva.fecha}</td>
-                        <td class="text-right">${reserva.hora}</td>
-                        <td class="text-right">${reserva.descuento}</td>
-                    `;
-                    tbody.appendChild(tr);
-                });
             }
 
             // Cargar datos del localStorage al iniciar
@@ -232,12 +255,88 @@
 
                 if (reservasAlmacenadas) {
                     reservas = JSON.parse(reservasAlmacenadas);
-                    actualizarTabla();
                 }
 
                 if (lastIdGuardado) {
                     nextId = parseInt(lastIdGuardado);
                 }
+            }
+
+            const mostrarModal = () => {
+                const modal = document.querySelector("#modal-descuento");
+                const mioverlay = document.querySelector(".mioverlay");
+                modal.classList.remove("hide");
+                mioverlay.classList.remove("hide");
+            };
+
+            const ocultarModal = () => {
+                const modal = document.querySelector("#modal-descuento");
+                const mioverlay = document.querySelector(".mioverlay");
+                modal.classList.add("hide");
+                mioverlay.classList.add("hide");
+            };
+
+            const seleccionarDescuento = () => {
+                ocultarModal();
+
+                // Simulamos una probabilidad del 30% de ganar un descuento del 10%
+                const ganador = Math.random() < 0.3;
+                const botonDescuento = document.querySelector(".btn-servicio");
+                const cajaDescuento = document.querySelector(".caja-descuento");
+
+                if (descuento != 0) return false;
+
+                botonDescuento.classList.add("hide");
+                cajaDescuento.classList.remove("hide");
+
+                if (ganador) {
+                    //Si es true, se lleva el 10%
+                    descuento = 10;
+                    cajaDescuento.innerHTML = `
+                    Haz ganado el ${descuento}% de descuento en el total de tu cuenta.
+                    `;
+                    return false;
+                }
+
+                //Si es false, se lleva el 5%
+                descuento = 5;
+                cajaDescuento.innerHTML = `
+                    Haz ganado el ${descuento}% de descuento en el total de tu cuenta.
+                    `;
+            };
+
+            function revealDiscount(card) {
+                const cards = document.querySelectorAll(".card");
+
+                descuento = 5;
+                const isWinner = Math.random() < 0.3;
+
+                if (isWinner) descuento = 10;
+
+                card.textContent = descuento + "%";
+                card.classList.add("revealed");
+
+                cards.forEach((element) => {
+                    if (!element.classList.contains("revealed")) {
+                        element.classList.add("hide");
+                    }
+                });
+
+                setTimeout(() => {
+                    const botonDescuento =
+                        document.querySelector(".btn-servicio");
+                    const cajaDescuento =
+                        document.querySelector(".caja-descuento");
+
+                    botonDescuento.classList.add("hide");
+                    cajaDescuento.classList.remove("hide");
+
+                    cajaDescuento.innerHTML = `
+                    Haz ganado el ${descuento}% de descuento en el total de tu cuenta.
+                    `;
+
+                    ocultarModal();
+                }, 1000);
             }
 
             const verificarDescuento = () => {

@@ -3,24 +3,28 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <link href="css/bootstrap.min.css" rel="stylesheet" />
         <title>servicio</title>
     </head>
     <body>
-        <h2>Listado de Reservas</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Telefono</th>
-                    <th class="text-right">Num personas</th>
-                    <th class="text-right">Fecha</th>
-                    <th class="text-right">Hora</th>
-                    <th class="text-right">Descuento</th>
-                </tr>
-            </thead>
-            <tbody id="productList"></tbody>
-        </table>
+        <div class="listado-R container-fluid">
+            <h2>Listado de Reservas</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Telefono</th>
+                        <th class="text-right">Num personas</th>
+                        <th class="text-right">Fecha</th>
+                        <th class="text-right">Hora</th>
+                        <th class="text-right">Descuento</th>
+                    </tr>
+                </thead>
+                <tbody id="productList"></tbody>
+            </table>
+        </div>
         <script>
             //Actualiza listado de reservas
             function actualizarTabla() {
