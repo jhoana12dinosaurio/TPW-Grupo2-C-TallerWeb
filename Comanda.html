@@ -201,7 +201,7 @@
       </div>
 
       <button type="submit">Registrar Pedido</button>
-      <button type="submit">Proceder con el pago</button>
+      <button type="button" onclick="window.location.href='registropago.html'">Proceder con el pago</button>
     </form>
 
     <h2>Listado de Pedidos</h2>
@@ -356,6 +356,10 @@
         setTimeout(() => alertError.style.display = 'none', 3000);
       }
     }
+
+    document.getElementById('proceedPayment').addEventListener('click', function() {
+    window.location.href = 'registropago.html';
+});
 
     // Cargar datos al iniciar la página
     cargarDatos();
