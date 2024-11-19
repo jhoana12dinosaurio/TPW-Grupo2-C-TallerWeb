@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="pagos.css" />
+    <title>Método de pago</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Registro de Pago</h2>
+        <form id="paymentForm">
+            <label for="nombre">Nombres y apellidos:</label>
+            <input type="text" id="nombre" required>
+
+            <label for="metodoPago">Método de Pago:</label>
+            <select id="metodoPago" required>
+                <option value="">Seleccione un método</option>
+                <option value="Efectivo">Efectivo</option>
+                <option value="Tarjeta de Crédito">Tarjeta de Crédito</option>
+                <option value="Tarjeta de Débito">Tarjeta de Débito</option>
+                <option value="Transferencia">Transferencia</option>
+                <option value="Transferencia">Efectivo y yape</option>
+                <option value="Transferencia">Efectivo y transferencia</option>
+                
+        
+            </select>
+
+            <label for="monto">Monto total:</label>
+            <input type="number" id="monto" step="0.01" required>
+
+
+            <button type="button" onclick="registrarPago()">Registrar Pago</button>
+        </form>
+
+        <div class="table-container">
+            <table id="tablaPagos">
+                <thead>
+                    <tr>
+                        <th>Nombre del Cliente</th>
+                        <th>Método de Pago</th>
+                        <th>Monto total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí se agregarán los registros -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function registrarPago() {
+            const nombre = document.getElementById("nombre").value;
+            const metodoPago = document.getElementById("metodoPago").value;
+            const monto = document.getElementById("monto").value;
+
+            if (nombre && metodoPago && monto) {
+                const tablaPagos = document.getElementById("tablaPagos").getElementsByTagName("tbody")[0];
+                const nuevaFila = tablaPagos.insertRow();
+
+                const celdaNombre = nuevaFila.insertCell(0);
+                const celdaMetodoPago = nuevaFila.insertCell(1);
+                const celdaMonto = nuevaFila.insertCell(2);
+
+                celdaNombre.textContent = nombre;
+                celdaMetodoPago.textContent = metodoPago;
+                celdaMonto.textContent = `S/${parseFloat(monto).toFixed(2)}`;
+
+                // Limpiar campos
+                document.getElementById("paymentForm").reset();
+            } else {
+                alert("Complete sus datos, por favor.");
+            }
+        }
+    </script>
+</body>
+</html>
