@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="styleComanda.css" type="text/css"/>
+    <title>Registro de Pedidos - Restaurante</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px;
+            padding: 0 20px;
+            flex: 2;
+        }
+
+    h1 {
+        font-size: 40px;
+        
+    font-family: "Satisfy", cursive;
+        margin-bottom: 15px;
+        color: #393433;
+}
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    select {
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    select:focus {
+      outline: none;
+      border-color: #4a90e2;
+      box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+    }
+
+    button {
+      background-color: #393433;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #357abd;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f5f5f5;
+      font-weight: bold;
+    }
+
+    .alert {
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 4px;
+      display: none;
+    }
+
+    .alert-success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .alert-error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    
+      .mesa-container-wrapper {
+            flex: 1;
+            margin: 20px;
+        }
+
+        h1, h2 {
+            color: #393433;
+            font-family: "Satisfy", cursive;
+        }
+
+        .mesa-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 10px;
+        }
+
+        .mesa {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .libre {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .reservado {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .ocupado {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Registro de Pedidos</h1>
+
+    <div id="alertSuccess" class="alert alert-success">
+      Pedido registrado exitosamente
+    </div>
+
+    <div id="alertError" class="alert alert-error">
+      Por favor seleccione un plato para cada curso
+    </div>
+
+    <form id="orderForm">
+      <div class="form-group">
+        <label for="entrada">Plato de Entrada:</label>
+        <select id="entrada" name="entrada" required>
+            <option value="">--Seleccione una opcion--</option>
+          <option value="causa">Causa rellena</option>
+                        <option value="sopa">Sopa</option>
+                        <option value="tortilla">Tortilla de coliflor</option>
+                        <option value="tamal">Tamales de pollo</option>
+                        <option value="huancaina">Papa a la huancaina</option>
+                        <option value="lechedetigre">
+                            Leche de tigre afrodisiaco
+                        </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="segundo">Plato de Segundo:</label>
+        <select id="segundo" name="segundo" required>
+          <option value="">--Seleccione una opcion--</option>
+                        <br />
+                        <option value="pasta">Pasta al Alfredo</option>
+                        <option value="filete">Filete de res</option>
+                        <option value="pollo">Pollo a la parrilla</option>
+                        <option value="ceviche">Ceviche clásico</option>
+                        <option value="chicharron">
+                            Chicharron de pescado y pota
+                        </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="postre">Postre:</label>
+        <select id="postre" name="postre" required>
+          <option value="">--Seleccione una opcion--</option>
+                        <option value="parfait">Parfait frutos rojos</option>
+                        <option value="helado">Helado</option>
+                        <option value="cheesecake">Cheesecake de fresa</option>
+                        <option value="ensalada">Ensalada de frutas</option>
+        </select>
+      </div>
+
+      <button type="submit">Registrar Pedido</button>
+    </form>
+
+    <h2>Listado de Pedidos</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Entrada</th>
+          <th>Segundo</th>
+          <th>Postre</th>
+        </tr>
+      </thead>
+      <tbody id="orderList">
+      </tbody>
+    </table>
+  </div>
+
+    <!-- Mapa de las mesas -->
+    <div class="mesa-container-wrapper">
+        <h2>Mapa de Mesas</h2>
+        <div class="mesa-container" id="mesaContainer"></div>
+    </div>
+
+    <script>
+        // Variables para las mesas
+        const mesas = [];
+        const filas = 5;
+        const columnas = 5;
+
+        // Inicializar mapa de mesas
+        function inicializarMesas() {
+            const container = document.getElementById('mesaContainer');
+            for (let i = 0; i < filas * columnas; i++) {
+                const mesa = { id: i + 1, estado: 'libre' };
+                mesas.push(mesa);
+
+                const div = document.createElement('div');
+                div.className = 'mesa libre';
+                div.id = `mesa-${mesa.id}`;
+                div.innerText = `Mesa ${mesa.id}`;
+                container.appendChild(div);
+
+                div.addEventListener('click', () => cambiarEstadoMesa(mesa, div));
+            }
+        }
+
+        // Cambiar estado de una mesa
+        function cambiarEstadoMesa(mesa, elemento) {
+            if (mesa.estado === 'libre') mesa.estado = 'reservado';
+            else if (mesa.estado === 'reservado') mesa.estado = 'ocupado';
+            else mesa.estado = 'libre';
+
+            elemento.className = `mesa ${mesa.estado}`;
+        }
+
+        document.addEventListener('DOMContentLoaded', inicializarMesas);
+    </script>
+</body>
+</html>
+  <script>
+    // Variables globales
+    let orders = [];
+    let nextId = 1;
+
+    // Cargar datos del localStorage al iniciar
+    function cargarDatos() {
+      const ordersGuardados = localStorage.getItem('orders');
+      const lastIdGuardado = localStorage.getItem('lastId');
+      
+      if (ordersGuardados) {
+        orders = JSON.parse(ordersGuardados);
+        actualizarTabla();
+      }
+      
+      if (lastIdGuardado) {
+        nextId = parseInt(lastIdGuardado);
+      }
+    }
+
+    // Guardar datos en localStorage
+    function guardarDatos() {
+      localStorage.setItem('orders', JSON.stringify(orders));
+      localStorage.setItem('lastId', nextId.toString());
+    }
+
+    document.getElementById('orderForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Obtener valores del formulario
+      const entrada = document.getElementById('entrada').value;
+      const segundo = document.getElementById('segundo').value;
+      const postre = document.getElementById('postre').value;
+
+      // Validar campos
+      if (!entrada || !segundo || !postre) {
+        showAlert('error');
+        return;
+      }
+
+      // Crear nuevo pedido
+      const order = {
+        id: nextId++,
+        entrada: entrada,
+        segundo: segundo,
+        postre: postre
+      };
+
+      // Agregar a la lista
+      orders.push(order);
+      
+      // Guardar en localStorage
+      guardarDatos();
+      
+      // Actualizar tabla
+      actualizarTabla();
+      
+      // Limpiar formulario
+      this.reset();
+      
+      // Mostrar mensaje de éxito
+      showAlert('success');
+    });
+
+    function actualizarTabla() {
+      const tbody = document.getElementById('orderList');
+      tbody.innerHTML = '';
+      
+      orders.forEach(order => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${order.id}</td>
+          <td>${order.entrada}</td>
+          <td>${order.segundo}</td>
+          <td>${order.postre}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function showAlert(type) {
+      const alertSuccess = document.getElementById('alertSuccess');
+      const alertError = document.getElementById('alertError');
+      
+      alertSuccess.style.display = 'none';
+      alertError.style.display = 'none';
+      
+      if (type === 'success') {
+        alertSuccess.style.display = 'block';
+        setTimeout(() => alertSuccess.style.display = 'none', 3000);
+      } else {
+        alertError.style.display = 'block';
+        setTimeout(() => alertError.style.display = 'none', 3000);
+      }
+    }
+
+    // Cargar datos al iniciar la página
+    cargarDatos();
+    
+  </script>
+  </div>
+</body>
+</html>
+
+
