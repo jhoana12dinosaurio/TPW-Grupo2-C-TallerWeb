@@ -147,24 +147,32 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Registro de Pedidos</h1>
+   <div class="container">
+        <h1>Gestion de Pedidos</h1>
+        <h2>Listado de Pedidos</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Mesa</th>
+                    <th>Estado</th>
+                    <th>Entrada</th>
+                    <th>Segundo</th>
+                    <th>Postre</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="orderList"></tbody>
+        </table>
 
-    <div id="alertSuccess" class="alert alert-success">
-      Pedido registrado exitosamente
-    </div>
-
-    <div id="alertError" class="alert alert-error">
-      Por favor seleccione un plato para cada curso
-    </div>
-
-    <form id="orderForm">
-      <div class="form-group">
-        <label for="entrada">Plato de Entrada:</label>
-        <select id="entrada" name="entrada" required>
-            <option value="">--Seleccione una opcion--</option>
-          <option value="causa">Causa rellena</option>
-                        <option value="sopa">Sopa</option>
+     <div id="editOrderForm" style="display: none; margin-top: 20px;">
+            <h3>Asignar Platos a Mesa</h3>
+            <form id="assignPlatesForm">
+                <label for="editEntrada">Plato de Entrada:</label>
+                <select id="editEntrada" required>
+                    <option value="">--Seleccione--</option>
+                    <option value="causa">Causa Rellena</option>
+                    <option value="sopa">Sopa</option>
                         <option value="tortilla">Tortilla de coliflor</option>
                         <option value="tamal">Tamales de pollo</option>
                         <option value="huancaina">Papa a la huancaina</option>
@@ -172,52 +180,35 @@
                             Leche de tigre afrodisiaco
                         </option>
         </select>
-      </div>
-
-      <div class="form-group">
-        <label for="segundo">Plato de Segundo:</label>
-        <select id="segundo" name="segundo" required>
-          <option value="">--Seleccione una opcion--</option>
-                        <br />
-                        <option value="pasta">Pasta al Alfredo</option>
-                        <option value="filete">Filete de res</option>
+                 <br>
+                <label for="editSegundo">Plato de Segundo:</label>
+                <select id="editSegundo" required>
+                    <option value="">--Seleccione--</option>
+                    <option value="pasta">Pasta al Alfredo</option>
+                    <option value="filete">Filete de Res</option>
                         <option value="pollo">Pollo a la parrilla</option>
-                        <option value="ceviche">Ceviche clásico</option>
+                        <option value="ceviche">Ceviche clasico</option>
                         <option value="chicharron">
                             Chicharron de pescado y pota
                         </option>
         </select>
-      </div>
-
-      <div class="form-group">
-        <label for="postre">Postre:</label>
-        <select id="postre" name="postre" required>
-          <option value="">--Seleccione una opcion--</option>
-                        <option value="parfait">Parfait frutos rojos</option>
-                        <option value="helado">Helado</option>
+       <br>
+                <label for="editPostre">Postre:</label>
+                <select id="editPostre" required>
+                    <option value="">--Seleccione--</option>
+                    <option value="parfait">Parfait</option>
+                    <option value="helado">Helado</option>
                         <option value="cheesecake">Cheesecake de fresa</option>
                         <option value="ensalada">Ensalada de frutas</option>
         </select>
-      </div>
+                <br>
 
       <button type="submit">Registrar Pedido</button>
       <button type="button" onclick="window.location.href='registropago.html'">Proceder con el pago</button>
     </form>
-
-    <h2>Listado de Pedidos</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Entrada</th>
-          <th>Segundo</th>
-          <th>Postre</th>
-        </tr>
-      </thead>
-      <tbody id="orderList">
-      </tbody>
-    </table>
-  </div>
+ </div>
+    </div>
+    
 
     <!-- Mapa de las mesas -->
     <div class="mesa-container-wrapper">
@@ -225,16 +216,19 @@
         <div class="mesa-container" id="mesaContainer"></div>
     </div>
 
-    <script>
-        // Variables para las mesas
-        const mesas = [];
-        const filas = 5;
-        const columnas = 5;
+    
+    
+    
+    
+    
+   <script>
+        let mesas = [];
+        let orders = [];
+        let nextOrderId = 1;
 
-        // Inicializar mapa de mesas
         function inicializarMesas() {
             const container = document.getElementById('mesaContainer');
-            for (let i = 0; i < filas * columnas; i++) {
+            for (let i = 0; i < 25; i++) {
                 const mesa = { id: i + 1, estado: 'libre' };
                 mesas.push(mesa);
 
@@ -244,21 +238,76 @@
                 div.innerText = `Mesa ${mesa.id}`;
                 container.appendChild(div);
 
-                div.addEventListener('click', () => cambiarEstadoMesa(mesa, div));
+                div.addEventListener('click', () => registrarMesa(mesa, div));
             }
         }
 
-        // Cambiar estado de una mesa
-        function cambiarEstadoMesa(mesa, elemento) {
-            if (mesa.estado === 'libre') mesa.estado = 'reservado';
-            else if (mesa.estado === 'reservado') mesa.estado = 'ocupado';
-            else mesa.estado = 'libre';
-
+        function registrarMesa(mesa, elemento) {
+            if (mesa.estado === 'libre') {
+                mesa.estado = 'reservado';
+                const pedido = {
+                    id: nextOrderId++,
+                    mesaId: mesa.id,
+                    estado: mesa.estado,
+                    entrada: null,
+                    segundo: null,
+                    postre: null
+                };
+                orders.push(pedido);
+                actualizarTablaPedidos();
+            } else {
+                alert('Mesa ya está registrada.');
+            }
             elemento.className = `mesa ${mesa.estado}`;
+        }
+
+        function editarPedido(mesaId) {
+            const pedido = orders.find(order => order.mesaId === mesaId);
+            if (!pedido) return;
+
+            const form = document.getElementById('editOrderForm');
+            form.style.display = 'block';
+
+            document.getElementById('editEntrada').value = pedido.entrada || '';
+            document.getElementById('editSegundo').value = pedido.segundo || '';
+            document.getElementById('editPostre').value = pedido.postre || '';
+
+            document.getElementById('assignPlatesForm').onsubmit = (e) => {
+                e.preventDefault();
+                pedido.entrada = document.getElementById('editEntrada').value;
+                pedido.segundo = document.getElementById('editSegundo').value;
+                pedido.postre = document.getElementById('editPostre').value;
+
+                actualizarTablaPedidos();
+                form.style.display = 'none';
+            };
+        }
+
+        function actualizarTablaPedidos() {
+            const tbody = document.getElementById('orderList');
+            tbody.innerHTML = '';
+            orders.forEach(order => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${order.id}</td>
+                    <td>Mesa ${order.mesaId}</td>
+                    <td>${order.estado}</td>
+                    <td>${order.entrada || 'N/A'}</td>
+                    <td>${order.segundo || 'N/A'}</td>
+                    <td>${order.postre || 'N/A'}</td>
+                    <td><button onclick="editarPedido(${order.mesaId})">Asignar Platos</button></td>
+                `;
+                tbody.appendChild(tr);
+            });
         }
 
         document.addEventListener('DOMContentLoaded', inicializarMesas);
     </script>
+
+
+
+
+
 </body>
 </html>
   <script>
