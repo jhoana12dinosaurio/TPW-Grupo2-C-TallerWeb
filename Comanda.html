@@ -251,7 +251,7 @@ function seleccionarMesa(mesa, elemento) {
     }
 }
 
-// Editar o crear un pedido
+//Para editar o crear un pedido
 function editarPedido(mesaId) {
     const form = document.getElementById('editOrderForm');
     form.style.display = 'block';
@@ -281,7 +281,7 @@ function editarPedido(mesaId) {
             const pedidoCreado = await response.json();
             orders.push(pedidoCreado);
             actualizarTablaPedidos();
-            form.style.display = 'none'; // Oculta el formulario
+            form.style.display = 'none'; //Para ocultar el formulario
         } catch (error) {
             console.error('Error al registrar el pedido:', error);
         }
@@ -328,7 +328,6 @@ document.addEventListener('DOMContentLoaded', inicializarMesas);
 
 
     </script>
-
 
 
 
