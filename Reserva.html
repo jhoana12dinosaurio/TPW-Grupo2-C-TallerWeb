@@ -208,6 +208,13 @@
                     hora: hora,
                     descuento: descuento,
                 };
+                // Mostrar notificación de éxito si están permitidas
+                if (Notification.permission === "granted") {
+                    mostrarNotificacion(
+                        "¡Reserva Exitosa!",
+                        `${nombre}, tu mesa para ${num_personas} personas está reservada para el ${fecha} a las ${hora}`
+                    );
+                }
 
                 // Agregar a la lista de reservas
                 reservas.push(reserva);
