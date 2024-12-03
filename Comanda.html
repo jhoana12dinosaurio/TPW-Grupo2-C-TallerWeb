@@ -171,139 +171,163 @@
                 <label for="editEntrada">Plato de Entrada:</label>
                 <select id="editEntrada" required>
                     <option value="">--Seleccione--</option>
-                    <option value="causa">Causa Rellena</option>
-                    <option value="sopa">Sopa</option>
-                        <option value="tortilla">Tortilla de coliflor</option>
-                        <option value="tamal">Tamales de pollo</option>
-                        <option value="huancaina">Papa a la huancaina</option>
-                        <option value="lechedetigre">
-                            Leche de tigre afrodisiaco
-                        </option>
-        </select>
+                    <option value="causa" data-price="18">Causa Rellena(S/.18)</option>
+                    <option value="sopa" data-price="15">Sopa de semola(S/.15)</option>
+                        <option value="tortilla" data-price="15">Tortilla de coliflor(S/.15)</option>
+                        <option value="tamal" data-price="14">Tamales de pollo(S/.14)</option>
+                        <option value="huancaina" data-price="16">Papa a la huancaina</option>
+                        <option value="lechedetigre" data-price="19">Leche de tigre afrodisiaco(S/.19)</option>
+                 </select>
                  <br>
                 <label for="editSegundo">Plato de Segundo:</label>
                 <select id="editSegundo" required>
                     <option value="">--Seleccione--</option>
-                    <option value="pasta">Pasta al Alfredo</option>
-                    <option value="filete">Filete de Res</option>
-                        <option value="pollo">Pollo a la parrilla</option>
-                        <option value="ceviche">Ceviche clasico</option>
-                        <option value="chicharron">
-                            Chicharron de pescado y pota
-                        </option>
+                    <option value="pasta" data-price="40">Pasta al Alfredo(S/.40)</option>
+                    <option value="Lomo" data-price="48">Lomo Saltado(S/.48)</option>
+                        <option value="pollo" data-price="42">Pollo a la parrilla(S/.42)</option>
+                        <option value="ceviche" data-price="52">Ceviche clasico(S/.52)</option>
+                        <option value="aji" data-price="38">Aji de gallina(S/.38)</option>
+                        <option value="Fetuccini" data-price="36">Fetuccini al Pesto(S/.36)</option>
         </select>
        <br>
                 <label for="editPostre">Postre:</label>
                 <select id="editPostre" required>
                     <option value="">--Seleccione--</option>
-                    <option value="parfait">Parfait</option>
-                    <option value="helado">Helado</option>
-                        <option value="cheesecake">Cheesecake de fresa</option>
-                        <option value="ensalada">Ensalada de frutas</option>
+                    <option value="parfait" data-price="25">Parfait frutos rojos(S/.25)</option>
+                    <option value="helado"data-price="17">Brownie con Helado(S/.17)</option>
+                        <option value="cheesecake"data-price="15">Cheesecake de maracuya(S/.15)</option>
+                        <option value="ensalada"data-price="18">Ensalada de frutas(S/.18)</option>
+                        <option value="arrozconleche" data-price="12">Arroz con leche(S/.12)</option>
         </select>
                 <br>
-
-      <button type="submit">Registrar Pedido</button>
-      <button type="button" onclick="window.location.href='registropago.html'">Proceder con el pago</button>
-    </form>
- </div>
+ <button type="submit">Registrar Pedido</button>
+            </form>
+        </div>
     </div>
-    
 
-    <!-- Mapa de las mesas -->
     <div class="mesa-container-wrapper">
         <h2>Mapa de Mesas</h2>
         <div class="mesa-container" id="mesaContainer"></div>
     </div>
 
+    <script src="script.js"></script>
+</body>
+</html>
     
     
     
     
-    
-   <script>
-        let mesas = [];
-        let orders = [];
-        let nextOrderId = 1;
+     <script>
+       const API_URL = 'https://jsonplaceholder.typicode.com/posts'; // URL base de la API
+let mesas = [];
+let orders = [];
+let nextOrderId = 1;
 
-        function inicializarMesas() {
-            const container = document.getElementById('mesaContainer');
-            for (let i = 0; i < 25; i++) {
-                const mesa = { id: i + 1, estado: 'libre' };
-                mesas.push(mesa);
+// Inicializar las mesas
+function inicializarMesas() {
+    const container = document.getElementById('mesaContainer');
+    for (let i = 0; i < 25; i++) {
+        const mesa = { id: i + 1, estado: 'libre' };
+        mesas.push(mesa);
 
-                const div = document.createElement('div');
-                div.className = 'mesa libre';
-                div.id = `mesa-${mesa.id}`;
-                div.innerText = `Mesa ${mesa.id}`;
-                container.appendChild(div);
+        const div = document.createElement('div');
+        div.className = 'mesa libre';
+        div.id = `mesa-${mesa.id}`;
+        div.innerText = `Mesa ${mesa.id}`;
+        container.appendChild(div);
 
-                div.addEventListener('click', () => registrarMesa(mesa, div));
-            }
-        }
+        div.addEventListener('click', () => seleccionarMesa(mesa, div));
+    }
+}
 
-        function registrarMesa(mesa, elemento) {
-            if (mesa.estado === 'libre') {
-                mesa.estado = 'reservado';
-                const pedido = {
-                    id: nextOrderId++,
-                    mesaId: mesa.id,
-                    estado: mesa.estado,
-                    entrada: null,
-                    segundo: null,
-                    postre: null
-                };
-                orders.push(pedido);
-                actualizarTablaPedidos();
-            } else {
-                alert('Mesa ya está registrada.');
-            }
-            elemento.className = `mesa ${mesa.estado}`;
-        }
+// Seleccionar una mesa
+function seleccionarMesa(mesa, elemento) {
+    if (mesa.estado === 'libre') {
+        mesa.estado = 'reservado';
+        elemento.className = `mesa ${mesa.estado}`;
+        editarPedido(mesa.id); // Abre el formulario para registrar el pedido
+    } else {
+        alert('Mesa ya está registrada.');
+    }
+}
 
-        function editarPedido(mesaId) {
-            const pedido = orders.find(order => order.mesaId === mesaId);
-            if (!pedido) return;
+// Editar o crear un pedido
+function editarPedido(mesaId) {
+    const form = document.getElementById('editOrderForm');
+    form.style.display = 'block';
 
-            const form = document.getElementById('editOrderForm');
-            form.style.display = 'block';
+    document.getElementById('assignPlatesForm').onsubmit = async (e) => {
+        e.preventDefault();
 
-            document.getElementById('editEntrada').value = pedido.entrada || '';
-            document.getElementById('editSegundo').value = pedido.segundo || '';
-            document.getElementById('editPostre').value = pedido.postre || '';
+        const entrada = document.getElementById('editEntrada').value;
+        const segundo = document.getElementById('editSegundo').value;
+        const postre = document.getElementById('editPostre').value;
 
-            document.getElementById('assignPlatesForm').onsubmit = (e) => {
-                e.preventDefault();
-                pedido.entrada = document.getElementById('editEntrada').value;
-                pedido.segundo = document.getElementById('editSegundo').value;
-                pedido.postre = document.getElementById('editPostre').value;
+        const nuevoPedido = {
+            id: nextOrderId++,
+            mesaId: mesaId,
+            estado: 'reservado',
+            entrada: entrada,
+            segundo: segundo,
+            postre: postre
+        };
 
-                actualizarTablaPedidos();
-                form.style.display = 'none';
-            };
-        }
-
-        function actualizarTablaPedidos() {
-            const tbody = document.getElementById('orderList');
-            tbody.innerHTML = '';
-            orders.forEach(order => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td>${order.id}</td>
-                    <td>Mesa ${order.mesaId}</td>
-                    <td>${order.estado}</td>
-                    <td>${order.entrada || 'N/A'}</td>
-                    <td>${order.segundo || 'N/A'}</td>
-                    <td>${order.postre || 'N/A'}</td>
-                    <td><button onclick="editarPedido(${order.mesaId})">Asignar Platos</button></td>
-                `;
-                tbody.appendChild(tr);
+        try {
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(nuevoPedido)
             });
+            const pedidoCreado = await response.json();
+            orders.push(pedidoCreado);
+            actualizarTablaPedidos();
+            form.style.display = 'none'; // Oculta el formulario
+        } catch (error) {
+            console.error('Error al registrar el pedido:', error);
         }
+    };
+}
 
-        document.addEventListener('DOMContentLoaded', inicializarMesas);
+// Actualizar la tabla de pedidos
+function actualizarTablaPedidos() {
+    const tbody = document.getElementById('orderList');
+    tbody.innerHTML = '';
+    orders.forEach(order => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${order.id}</td>
+            <td>Mesa ${order.mesaId}</td>
+            <td>${order.estado}</td>
+            <td>${order.entrada || 'N/A'}</td>
+            <td>${order.segundo || 'N/A'}</td>
+            <td>${order.postre || 'N/A'}</td>
+            <td>
+                <button onclick="eliminarPedido(${order.id})">Eliminar</button>
+                <br>
+                <button onclick="proceedPayment()">Proceder con el Pago</button>
+            </td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+// Eliminar un pedido
+function eliminarPedido(orderId) {
+    orders = orders.filter(order => order.id !== orderId);
+    actualizarTablaPedidos();
+}
+
+// Redirigir al registro de pago
+function proceedPayment() {
+    window.location.href = 'registropago.html';
+}
+
+
+// Inicializar al cargar la página
+document.addEventListener('DOMContentLoaded', inicializarMesas);
+
+
     </script>
-
 
 
 
@@ -416,6 +440,5 @@
   </script>
   </div>
 </body>
-</html>
-
+</html> 
 
