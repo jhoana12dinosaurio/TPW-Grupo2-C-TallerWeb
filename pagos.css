@@ -70,3 +70,14 @@ th {
     background-color: #28a745;
     color: white;
 }
+
+#pagosCombinados {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#pagosCombinados select, 
+#pagosCombinados input {
+    width: 100%;
+}
