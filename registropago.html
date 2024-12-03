@@ -14,17 +14,32 @@
             <input type="text" id="nombre" required>
 
             <label for="metodoPago">Método de Pago:</label>
-            <select id="metodoPago" required>
+            <select id="metodoPago" required onchange="mostrarCamposDivididos()">
                 <option value="">Seleccione un método</option>
                 <option value="Efectivo">Efectivo</option>
                 <option value="Tarjeta de Crédito">Tarjeta de Crédito</option>
                 <option value="Tarjeta de Débito">Tarjeta de Débito</option>
                 <option value="Transferencia">Transferencia</option>
-                <option value="Transferencia">Efectivo y yape</option>
-                <option value="Transferencia">Efectivo y transferencia</option>
-                
-        
+                <option value="Combinado">Pago Combinado</option>
             </select>
+
+            <div id="pagosCombinados" class="payment-split">
+                <select id="metodo1" style="flex: 1;">
+                    <option value="Efectivo">Efectivo</option>
+                    <option value="Tarjeta de Crédito">Tarjeta de Crédito</option>
+                    <option value="Tarjeta de Débito">Tarjeta de Débito</option>
+                    <option value="Transferencia">Transferencia</option>
+                </select>
+                <input type="number" id="monto1" placeholder="Monto 1" step="0.01">
+                
+                <select id="metodo2" style="flex: 1;">
+                    <option value="Efectivo">Efectivo</option>
+                    <option value="Tarjeta de Crédito">Tarjeta de Crédito</option>
+                    <option value="Tarjeta de Débito">Tarjeta de Débito</option>
+                    <option value="Transferencia">Transferencia</option>
+                </select>
+                <input type="number" id="monto2" placeholder="Monto 2" step="0.01">
+            </div>
 
             <label for="monto">Monto total:</label>
             <input type="number" id="monto" step="0.01" required>
@@ -50,25 +65,51 @@
     </div>
 
     <script>
+        function mostrarCamposDivididos() {
+            const metodoPago = document.getElementById("metodoPago").value;
+            const pagosCombinados = document.getElementById("pagosCombinados");
+            const montoTotal = document.getElementById("monto");
+            
+            if (metodoPago === "Combinado") {
+                pagosCombinados.style.display = "flex";
+                montoTotal.setAttribute('readonly', true);
+            } else {
+                pagosCombinados.style.display = "none";
+                montoTotal.removeAttribute('readonly');
+            }
+        }
+
         function registrarPago() {
             const nombre = document.getElementById("nombre").value;
             const metodoPago = document.getElementById("metodoPago").value;
-            const monto = document.getElementById("monto").value;
+            let monto = document.getElementById("monto").value;
+            let metodoDescripcion = metodoPago;
+
+            if (metodoPago === "Combinado") {
+                const metodo1 = document.getElementById("metodo1").value;
+                const metodo2 = document.getElementById("metodo2").value;
+                const monto1 = parseFloat(document.getElementById("monto1").value || 0);
+                const monto2 = parseFloat(document.getElementById("monto2").value || 0);
+                
+                monto = monto1 + monto2;
+                metodoDescripcion = `${metodo1} (S/${monto1.toFixed(2)}) + ${metodo2} (S/${monto2.toFixed(2)})`;
+            }
 
             if (nombre && metodoPago && monto) {
                 const tablaPagos = document.getElementById("tablaPagos").getElementsByTagName("tbody")[0];
                 const nuevaFila = tablaPagos.insertRow();
-
+                
                 const celdaNombre = nuevaFila.insertCell(0);
                 const celdaMetodoPago = nuevaFila.insertCell(1);
                 const celdaMonto = nuevaFila.insertCell(2);
-
+                
                 celdaNombre.textContent = nombre;
-                celdaMetodoPago.textContent = metodoPago;
+                celdaMetodoPago.textContent = metodoDescripcion;
                 celdaMonto.textContent = `S/${parseFloat(monto).toFixed(2)}`;
-
+                
                 // Limpiar campos
                 document.getElementById("paymentForm").reset();
+                document.getElementById("pagosCombinados").style.display = "none";
             } else {
                 alert("Complete sus datos, por favor.");
             }
